@@ -4,7 +4,12 @@ import joblib
 import numpy as np
 
 # Load trained model
-model = joblib.load(r"https://github.com/DiyaBinilal/IS6611-V2/blob/main/dropout_prediction_model.pkl")
+import requests
+import io
+
+url = "https://raw.githubusercontent.com/DiyaBinilal/IS6611-V2/main/dropout_prediction_model.pkl"
+response = requests.get(url)
+model = joblib.load(io.BytesIO(response.content))
 
 st.title("Dropout Prediction Model")
 features = st.text_input("Enter Student Data (comma-separated)")
